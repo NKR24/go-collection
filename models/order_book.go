@@ -1,14 +1,14 @@
 package models
 
 type DepthOrder struct {
-	Price   float64
-	BaseQty float64
+	Price   float64 `json:"price"`
+	BaseQty float64 `json:"base_qty"`
 }
 
 type OrderBook struct {
 	ID       int64        `json:"id" gorm:"primaryKey"`
 	Exchange string       `json:"exchange"`
 	Pair     string       `json:"pair"`
-	Asks     []DepthOrder `json:"asks" gorm:"serializer:json"`
-	Bids     []DepthOrder `json:"bids" gorm:"serializer:json"`
+	Asks     []DepthOrder `json:"asks" gorm:"type:jsonb"`
+	Bids     []DepthOrder `json:"bids" gorm:"type:jsonb e"`
 }
