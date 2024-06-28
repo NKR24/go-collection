@@ -2,6 +2,7 @@ package db
 
 import (
 	"api/config"
+	"api/models"
 	"fmt"
 
 	"gorm.io/driver/postgres"
@@ -22,5 +23,10 @@ func Init() {
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
+	}
+
+	err = DB.AutoMigrate(&models.OrderBook{}, &models.HistoryOrder{}, &models.Client{}, &models.DepthOrder{})
+	if err != nil {
+		panic("failed to migrate database")
 	}
 }
